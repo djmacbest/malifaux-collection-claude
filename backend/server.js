@@ -1,5 +1,5 @@
-// ===== FILE: backend/server.js =====
-// Copy this content and save as: backend/server.js
+// ===== FILE 4: backend/server.js =====
+// REPLACE your existing server.js with this updated version
 
 require('dotenv').config();
 const express = require('express');
@@ -10,7 +10,8 @@ const path = require('path');
 
 // Import routes
 const authRoutes = require('./routes/auth');
-const miniatureRoutes = require('./routes/miniatures');
+const masterMiniatureRoutes = require('./routes/masterMiniatures');
+const collectionRoutes = require('./routes/collections');
 const photoRoutes = require('./routes/photos');
 const commentRoutes = require('./routes/comments');
 
@@ -50,7 +51,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // API routes
 app.use('/api/auth', authRoutes);
-app.use('/api/miniatures', miniatureRoutes);
+app.use('/api/master-miniatures', masterMiniatureRoutes);
+app.use('/api/collections', collectionRoutes);
 app.use('/api/photos', photoRoutes);
 app.use('/api/comments', commentRoutes);
 
@@ -59,7 +61,7 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    version: '1.0.0'
+    version: '2.0.0 - Master Miniature System'
   });
 });
 
@@ -96,6 +98,7 @@ app.listen(PORT, () => {
   console.log(`📷 Photo uploads: /uploads`);
   console.log(`🔧 API health check: http://localhost:${PORT}/api/health`);
   console.log(`📚 API base URL: http://localhost:${PORT}/api`);
+  console.log(`🎯 Master Miniature System v2.0 - Ready!`);
 });
 
 // Graceful shutdown
